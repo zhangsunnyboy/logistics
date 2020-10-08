@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qfedu.dao.GroupDao">
+    <resultMap id="FunctionWithGroup" type="FunctionWithGroup">
+        <id column="id" property="id"></id>
+        <result column="function_id" property="functionId"></result>
+        <result column="group_id" property="groupId"></result>
+    </resultMap>
+    <select id="selectFunc" resultMap="FunctionWithGroup" parameterType="String">
+        select  fun.* from FunctionWithGroup fun
+        join userwithgroup us on us.group_id=fun.group_id
+        join user u on u.login_id=us.user_id
+        where u.login_id =#{loginId}
+    </select>
+</mapper>
